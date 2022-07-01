@@ -1,5 +1,4 @@
 # Restful_WebService
-Now that you have set up the project and build system, you can create your web service.
 
 Begin the process by thinking about service interactions.
 
@@ -8,7 +7,7 @@ The service will handle GET requests for /greeting, optionally with a name param
 {
     "id": 1,
     "content": "Hello, World!"
-}COPY
+}
 The id field is a unique identifier for the greeting, and content is the textual representation of the greeting.
 
 To model the greeting representation, create a resource representation class. To do so, provide a plain old Java object with fields, constructors, and accessors for the id and content data, as the following listing (from src/main/java/com/example/restservice/Greeting.java) shows:
@@ -32,9 +31,10 @@ public class Greeting {
 	public String getContent() {
 		return content;
 	}
-}COPY
+}
 This application uses the Jackson JSON library to automatically marshal instances of type Greeting into JSON. Jackson is included by default by the web starter.
 Create a Resource Controller
+
 In Spring’s approach to building RESTful web services, HTTP requests are handled by a controller. These components are identified by the @RestController annotation, and the GreetingController shown in the following listing (from src/main/java/com/example/restservice/GreetingController.java) handles GET requests for /greeting by returning a new instance of the Greeting class:
 
 package com.example.restservice;
@@ -55,7 +55,7 @@ public class GreetingController {
 	public Greeting greeting(@RequestParam(value = "name", defaultValue = "World") String name) {
 		return new Greeting(counter.incrementAndGet(), String.format(template, name));
 	}
-}COPY
+}
 This controller is concise and simple, but there is plenty going on under the hood. We break it down step by step.
 
 The @GetMapping annotation ensures that HTTP GET requests to /greeting are mapped to the greeting() method.
